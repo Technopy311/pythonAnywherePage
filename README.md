@@ -28,4 +28,5 @@ tailwindcss
 postcss 
 postcss-cli 
 autoprefixer
+daisyui
 ```
