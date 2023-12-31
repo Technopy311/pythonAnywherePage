@@ -1,23 +1,78 @@
 {% extends 'core/base.html' %} {% block inbody %}
-
-<div class="hero min-h-screen bg-base-200">
-  <div class="hero-content text-center">
-    <div class="max-w-md">
-      <h1 class="text-5xl font-bold">Hello there</h1>
-      <p class="py-6">
-        Welcome to my personal page, here you may see my portfolio, photographs, and who knows what else.
+<!-- Hero section -->
+{% load static %}
+<div class="hero min-h-screen bg-base-200 scroll-smooth" style="background-image: url({% static 'core/career_bg.jpg' %})">
+  <div
+    class="text-center basis-1/3 min-h-screen my-auto mr-auto md:pl-2 md:pr-2 bg-neutral-100 opacity-90">
+    <div class="max-w h-full min-h-screen pt-24 md:pt-40">
+      <h1 class="text-7xl text-black font-bold">I Am Technopy</h1>
+      <p class="px-3 p-1 my-6 text-2xl text-black opacity-80">
+        Welcome to <b>my personal page</b>, here you can know me a little bit
+        more. <br />
+        From my <b>professional portfolio</b>, to the
+        <b>photographs I have taken</b>, <br />and maybe something more. Feel
+        free to look around.
       </p>
-      <button class="btn btn-primary">See more</button>
+      <a href="#abouttitle" class="btn text-white bg-black rounded-sm hover:text-black hover:bg-white hover:border-white hover:scale-105 duration-200">
+        Know More
+      </a>
     </div>
   </div>
 </div>
 
-<div class="divider"></div>
+<!-- End hero section -->
 
-<div class="flex w-full">
-    <div class="grid h-20 flex-grow bg-base-200 rounded-box place-items-center">content</div>
-    <div class="divider divider-horizontal"></div>
-    <div class="grid h-20 flex-grow bg-base-200 rounded-box place-items-center">content</div>
+<!-- Choosing section -->
+
+<divclass="w-full min-h-screen flex flex-col flex-nowrap justify-around pl-2 md:pl-4 bg-neutral-100 my-2">
+  <div class="flex flex-col my-4">
+    <h1 class="text-5xl font-medium basis-2/5 my-4 md:ml-4">
+      Latest Photography Works
+    </h1>
+    <div class="flex flex-row justify-evenly flex-wrap py-4">
+    {% if latest_photos %}
+      <div class="carousel rounded-box">
+        {% for photo in latest_photos %}
+          <div class="carousel-item">
+            <img src="#" alt="{{photo.title}}"/>
+          </div>
+        {% endfor %}
+      {% else %}
+          <p class="text-xl">No photos</p>
+      {% endif %}
+      </div>
+    </div>
   </div>
+
+  <div class="flex flex-col my-4">
+    <h1 class="text-5xl font-medium basis-2/5 my-4 md:ml-4">Latest Projects</h1>
+    <div class="flex flex-row justify-evenly flex-wrap py-4">
+     
+      {% if latest_projects %}
+      <div class="carousel rounded-box space-x-4">
+        {% for project in latest_projects %}
+        <div class="carousel-item">
+          <div class="card card-compact w-96 bg-base-100 shadow-xl">
+            <figure>
+              <img src="{{project.main_photo}}" alt="{{project.title}} main photo"/>
+            </figure>
+            <div class="card-body">
+              <h2 class="card-title">{{project.title}}</h2>
+              <p>{{project.excerpt}}</p>
+              <div class="card-actions justify-end">
+                <a href="#" class="btn btn-neutral text-white">Know more</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %} 
+        <p class="text-xl">No projects</p>
+      {% endif %}
+
+    </div>
+  </div>
+</div>
 
 {% endblock %}
